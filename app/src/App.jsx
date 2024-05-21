@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import styled from 'styled-components'
-const BASE_URL = "http://localhost:9000/"
+import SearchResult from './components/SearchResult'
+export const BASE_URL = "http://localhost:9000"
 
 function App() {
 
@@ -63,10 +64,7 @@ function App() {
       <Button>Lunch</Button>
       <Button>Dinner</Button>
     </FilterContainer>
-    <FoodCardContainer>
-
-      <FoodCards></FoodCards>
-    </FoodCardContainer>
+    <SearchResult data={data}/>
   </Container>
   )
 }
@@ -112,10 +110,4 @@ const Button = styled.button`
   cursor: pointer;
   
 `
-const FoodCardContainer = styled.section`
-height: calc(100vh - 190px);
-width: 100%;
-background-image: url('./images/background.jpg');
-background-size: cover;
-`
-const FoodCards = styled.div``
+
