@@ -7,8 +7,10 @@ function App() {
   <MainContainer>
     <TopContainer>
       <div className='logo'>
-        <img src="./images/FoodyZone.png" alt="" />
-
+        <img src="./images/FoodyZone.png" alt="logo" />
+      </div>
+      <div className='search'>
+        <input type="search" placeholder='Search food'/>
       </div>
     </TopContainer>
   </MainContainer>
@@ -17,5 +19,9 @@ function App() {
 
 export default App
 
-const MainContainer = styled.div``;
-const TopContainer = styled.div``
+const MainContainer = styled.div`
+background-color:#323334
+
+`;
+ const TopContainer = styled.section`
+`;
