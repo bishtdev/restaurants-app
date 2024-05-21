@@ -102,7 +102,7 @@ const FilterContainer = styled.section`
   justify-content: center;
   margin-bottom: 20px;
 `
-const Button = styled.button`
+export const Button = styled.button`
   background: #ff4343;
   border-radius: 2px ;
   padding: 6px 12px;
