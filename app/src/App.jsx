@@ -10,9 +10,10 @@ function App() {
   const [filteredData, setFilteredData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [selectedBtn, setSelectedBtn] = useState('all')
 
-  
 
+// for fetching the data
   useEffect(()=>{
     const fetchFoodData = async () => {
       setLoading(true)
@@ -30,15 +31,12 @@ function App() {
     }
     fetchFoodData()
   },[])
-  console.log(data)
   
-  if(error) return <div> {error}</div>
-  if(loading) return <div> loading.......</div>
 
-  // FUNCTION FOR SEARCH FUNCTINALITY
+// FUNCTION FOR SEARCH FUNCTINALITY
   const searchFood = (e) => {
     const searchValue = e.target.value;
-    console.log(searchValue)
+    // console.log(searchValue)
 
     if(searchValue === ''){
       setFilteredData(null)
@@ -51,6 +49,27 @@ function App() {
     )
     setFilteredData(filter)
   }
+
+// for selecting the dinning type btn
+  const filterFood =(type) =>{
+    if(type === 'all'){
+      setFilteredData(data)
+      setSelectedBtn('all')
+      return
+    }
+
+    const filter = data.filter((food) => 
+      food.type.toLowerCase().includes(type.toLowerCase())
+    )
+    setFilteredData(filter)
+    setSelectedBtn(type)
+  }
+
+
+
+
+  if(error) return <div> {error}</div>
+  if(loading) return <div> loading.......</div>
 
 
 
@@ -70,10 +89,10 @@ function App() {
     </TopContainer>
 
     <FilterContainer>
-      <Button>All</Button>
-      <Button>Breakfast</Button>
-      <Button>Lunch</Button>
-      <Button>Dinner</Button>
+      <Button isSeleceted ={selectedBtn === value.type } onClick={()=>filterFood('all')}>All</Button>
+      <Button isSeleceted ={selectedBtn === value.type } onClick={()=>filterFood('breakfast')}>Breakfast</Button>
+      <Button isSeleceted ={selectedBtn === value.type } onClick={()=>filterFood('lunch')}>Lunch</Button>
+      <Button isSeleceted ={selectedBtn === value.type } onClick={()=>filterFood('dinner')}>Dinner</Button>
     </FilterContainer>
   </Container>
     <SearchResult data={filteredData}/>
@@ -106,6 +125,10 @@ margin: 0 auto;
   padding: 0 10px;
   }
  }
+ @media (0 < width < 600px){
+  flex-direction: column;
+  align-items: center;
+ }
 `;
 
 const FilterContainer = styled.section`
@@ -115,7 +138,7 @@ const FilterContainer = styled.section`
   margin-bottom: 20px;
 `
 export const Button = styled.button`
-  background: #ff4343;
+  background: ${({isSeleceted})=>(isSeleceted ? "#ba2121" :"#ff4343") } ;
   border-radius: 2px ;
   padding: 6px 12px;
   border: none;
