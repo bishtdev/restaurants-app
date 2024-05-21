@@ -89,10 +89,10 @@ function App() {
     </TopContainer>
 
     <FilterContainer>
-      <Button isSeleceted ={selectedBtn === value.type } onClick={()=>filterFood('all')}>All</Button>
-      <Button isSeleceted ={selectedBtn === value.type } onClick={()=>filterFood('breakfast')}>Breakfast</Button>
-      <Button isSeleceted ={selectedBtn === value.type } onClick={()=>filterFood('lunch')}>Lunch</Button>
-      <Button isSeleceted ={selectedBtn === value.type } onClick={()=>filterFood('dinner')}>Dinner</Button>
+      <Button onClick={()=>filterFood('all')}>All</Button>
+      <Button onClick={()=>filterFood('breakfast')}>Breakfast</Button>
+      <Button onClick={()=>filterFood('lunch')}>Lunch</Button>
+      <Button onClick={()=>filterFood('dinner')}>Dinner</Button>
     </FilterContainer>
   </Container>
     <SearchResult data={filteredData}/>
@@ -138,7 +138,7 @@ const FilterContainer = styled.section`
   margin-bottom: 20px;
 `
 export const Button = styled.button`
-  background: ${({isSeleceted})=>(isSeleceted ? "#ba2121" :"#ff4343") } ;
+  background: #ff4343;
   border-radius: 2px ;
   padding: 6px 12px;
   border: none;
