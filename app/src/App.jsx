@@ -7,6 +7,7 @@ function App() {
   <MainContainer>
     <TopContainer>
       <div className='logo'>
+        <img src="/FoodyZone.png" alt="" />
 
       </div>
     </TopContainer>
