@@ -7,6 +7,7 @@ export const BASE_URL = "http://localhost:9000"
 function App() {
 
   const [data, setData] = useState(null)
+  const [filteredData, setFilteredData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -20,6 +21,7 @@ function App() {
   
       const json = await response.json()
       setData(json)
+      setFilteredData(json)
       setLoading(false)
       } catch (error){
         setError('Unable to Fetch data')
@@ -29,32 +31,41 @@ function App() {
     fetchFoodData()
   },[])
   console.log(data)
-
-  const temp = [
-    
-      {
-          "name": "Boilded Egg",
-          "price": 10,
-          "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-          "image": "/images/egg.png",
-          "type": "breakfast"
-      },
-     
-  ]
   
   if(error) return <div> {error}</div>
   if(loading) return <div> loading.......</div>
 
+  // FUNCTION FOR SEARCH FUNCTINALITY
+  const searchFood = (e) => {
+    const searchValue = e.target.value;
+    console.log(searchValue)
+
+    if(searchValue === ''){
+      setFilteredData(null)
+
+    }
+      
+
+    const filter = data.filter((food) => 
+      food.name.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    setFilteredData(filter)
+  }
+
+
+
+
 
 
   return (
+  <>
   <Container>
     <TopContainer>
       <div className='logo'>
         <img src="./images/FoodyZone.png" alt="logo" />
       </div>
       <div className='search'>
-        <input type="text" placeholder='Search food'/>
+        <input onChange={searchFood} type="text" placeholder='Search food'/>
       </div>
     </TopContainer>
 
@@ -64,14 +75,15 @@ function App() {
       <Button>Lunch</Button>
       <Button>Dinner</Button>
     </FilterContainer>
-    <SearchResult data={data}/>
   </Container>
+    <SearchResult data={filteredData}/>
+  </>
   )
 }
 
 export default App
 
-const Container = styled.div`
+export const Container = styled.div`
 background-color:#323334;
 max-width: 1200px;
 margin: 0 auto;
@@ -108,6 +120,9 @@ export const Button = styled.button`
   padding: 6px 12px;
   border: none;
   cursor: pointer;
+  &:hover{
+    background-color: #ba2121;
+  }
   
 `
 
