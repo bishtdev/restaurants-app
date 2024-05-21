@@ -13,6 +13,13 @@ function App() {
         <input type="text" placeholder='Search food'/>
       </div>
     </TopContainer>
+
+    <FilterContainer>
+      <Button>All</Button>
+      <Button>Breakfast</Button>
+      <Button>Lunch</Button>
+      <Button>Dinner</Button>
+    </FilterContainer>
   </Container>
   )
 }
@@ -43,3 +50,17 @@ margin: 0 auto;
   }
  }
 `;
+
+const FilterContainer = styled.section`
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+`
+const Button = styled.button`
+  background: #ff4343;
+  border-radius: 2px ;
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  
+`
